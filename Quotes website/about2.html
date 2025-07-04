@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Your Quotes</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 15px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 15px;
+      margin: 20px;
+      box-shadow: 0 0 20px #f0f;
+      position: relative;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .logo-image {
+      height: 70px;
+      width: auto;
+      filter: drop-shadow(0 0 5px #ff00ff);
+    }
+
+    /* Hamburger styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 35px;
+      height: 25px;
+      justify-content: space-between;
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      z-index: 1000;
+      padding: 5px;
+      border-radius: 8px;
+      background-color: #1a1a1a;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background-color: white;
+      border-radius: 4px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 8px #ff00ff;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 20px;
+      border: 1px solid #ff00ff;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 0 5px #ff00ff;
+      display: block;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      background-color: #ff00ff;
+      color: black;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    /* Responsive nav styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #1a1a1a;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        width: 100%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .logo-image {
+        height: 40px;
+      }
+    }
+
+    .about-container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #1a1a1a;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    .about-container h1 {
+      color: #ff00ff;
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .about-container h3 {
+      text-align: center;
+      color: #00ffff;
+      margin-bottom: 30px;
+      font-weight: normal;
+    }
+
+    .about-container img {
+      display: block;
+      margin: 0 auto 25px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff00ff;
+    }
+
+    .about-container p {
+      margin-bottom: 20px;
+      line-height: 1.8;
+      color: #ddd;
+      text-align: justify;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      box-shadow: 0 0 10px #f0f;
+    }
+
+    .animated-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .animated-background::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, #ff00ff, transparent 40%),
+        radial-gradient(circle at 70% 70%, #00ffff, transparent 40%),
+        radial-gradient(circle at 50% 50%, #00ff00, transparent 30%);
+      animation: moveBackground 20s linear infinite;
+      filter: blur(100px);
+      opacity: 0.6;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(-20%, -20%) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(10%, 10%) rotate(180deg);
+      }
+
+      100% {
+        transform: translate(-20%, -20%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="animated-background"></div>
+
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" class="logo-image" />
+      <span class="logo-text">Your Quotes</span>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav>
+      <ul id="nav-links">
+        <li><a href="main.html">Home</a></li>
+        <li><a href="term2.html">Terms</a></li>
+        <li><a href="about2.html" class="active">About</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="about-container">
+    <h1>About Me</h1>
+    <h3>Curator of Motivation | Quote Designer | Web Creator</h3>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3bTO77P9aOroq-p41zFhirpxRtxgtWrQrnA&s"
+      alt="Debananda's Photo" />
+    <p>Hello! My name is <strong>Debananda Kuanr</strong>, a content creator and quote enthusiast who loves to explore
+      inspiration through words and visuals. I'm passionate about designing digital spaces that empower others through
+      meaningful messages.</p>
+    <p>This project—<strong>Your Quotes</strong>—is a platform where I share motivational content designed to lift,
+      guide, and energize your daily life. I believe that just one quote at the right moment can make a big
+      difference.</p>
+    <p>Thank you for being here. Keep discovering, keep believing, and stay inspired 🌟</p>
+  </section>
+
+  <footer>
+    &copy; 2025 InspireQuotes || All rights reserved || Developed by Debananda Kuanr.
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("show");
+    });
+  </script>
+
+</body>
+
+</html>

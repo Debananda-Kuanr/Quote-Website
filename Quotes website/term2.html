@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Quotes - Terms</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    .animated-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #111;
+    }
+
+    .animated-background::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, #ff00ff, transparent 40%),
+        radial-gradient(circle at 70% 70%, #00ffff, transparent 40%),
+        radial-gradient(circle at 50% 50%, #00ff00, transparent 30%);
+      animation: moveBackground 20s linear infinite;
+      filter: blur(100px);
+      opacity: 0.6;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(-20%, -20%) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(10%, 10%) rotate(180deg);
+      }
+
+      100% {
+        transform: translate(-20%, -20%) rotate(360deg);
+      }
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 15px 30px;
+      border-radius: 15px;
+      margin: 20px;
+      box-shadow: 0 0 20px #f0f;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .logo-image {
+      height: 40px;
+      filter: drop-shadow(0 0 5px #ff00ff);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 45px;
+      height: 35px;
+      justify-content: space-around;
+      padding: 8px;
+      z-index: 1001;
+      border-radius: 8px;
+      background-color: #1a1a1a;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background-color: white;
+      border-radius: 4px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 8px #ff00ff;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+      background-color: #ff00ff;
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+      background-color: #ff00ff;
+    }
+
+    nav {
+      width: auto;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 20px;
+      border: 1px solid #ff00ff;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 0 5px #ff00ff;
+      display: block;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #ff00ff;
+      color: black;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .hamburger {
+        display: flex;
+        margin-left: auto;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px 0;
+        display: none;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    .terms-container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #1a1a1a;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    .terms-container h1 {
+      color: #ff00ff;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .terms-container h3 {
+      color: #ff00ff;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .terms-container p,
+    .terms-container ul {
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+
+    .terms-container ul {
+      padding-left: 20px;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      box-shadow: 0 0 10px #f0f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="animated-background"></div>
+
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" class="logo-image" />
+      <span class="logo-text">Your Quotes</span>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav>
+      <ul id="nav-links">
+        <li><a href="main.html">Home</a></li>
+        <li><a href="term2.html" class="active">Terms</a></li>
+        <li><a href="about2.html">About</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="terms-container">
+    <h1>Terms & Conditions</h1>
+
+    <p>Welcome to Your Quotes! These terms and conditions outline the rules and regulations for using our website...</p>
+
+    <h3>1. Intellectual Property Rights</h3>
+    <p>Unless otherwise stated, all content on this website including text, images, logos, and graphics...</p>
+
+    <h3>2. Use License</h3>
+    <p>You may view and interact with content on our site for personal, non-commercial use. You must not:</p>
+    <ul>
+      <li>Republish material from this website without credit</li>
+      <li>Sell, rent or sub-license material</li>
+      <li>Reproduce or copy material for commercial purposes</li>
+    </ul>
+
+    <h3>3. User Contributions</h3>
+    <p>By submitting content (quotes, feedback, or suggestions), you grant us permission to use, modify, and display...</p>
+
+    <h3>4. Disclaimer</h3>
+    <p>All content is provided "as is". We make no guarantees about accuracy, reliability, or completeness...</p>
+
+    <h3>5. Limitation of Liability</h3>
+    <p>We are not liable for any direct, indirect, incidental, or consequential damages resulting from your use...</p>
+
+    <h3>6. Modifications</h3>
+    <p>We may revise these terms at any time without notice...</p>
+
+    <h3>7. Third-Party Links</h3>
+    <p>This website may contain links to external websites. We do not control or endorse their content...</p>
+
+    <h3>8. Governing Law</h3>
+    <p>These terms are governed by and interpreted in accordance with the laws of your local jurisdiction...</p>
+
+    <h3>9. Contact Us</h3>
+    <p>If you have any questions, contact us at
+      <a href="mailto:debanandakuanr453@gmail.com" style="color: #ff00ff;">debanandakuanr453@gmail.com</a>.
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 InspireQuotes || All rights reserved || Developed by Debananda Kuanr.
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("show");
+    });
+  </script>
+</body>
+
+</html>

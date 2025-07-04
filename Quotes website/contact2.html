@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotes Website</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #111;
+            color: white;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 15px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 15px;
+            margin: 20px;
+            box-shadow: 0 0 20px #f0f;
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 35px;
+            height: 25px;
+            justify-content: space-between;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 4px;
+            background-color: white;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 8px #ff00ff;
+        }
+
+        .hamburger:hover {
+            box-shadow: 0 0 25px #ff00ff;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid #ff00ff;
+            border-radius: 8px;
+            transition: 0.3s;
+            box-shadow: 0 0 5px #ff00ff;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            background-color: #ff00ff;
+            color: black;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            box-shadow: 0 0 10px #f0f;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                width: 100%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background-color: #1a1a1a;
+                padding: 10px 0;
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li a {
+                width: 100%;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-image {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 5px #ff00ff);
+        }
+
+        @media (max-width: 480px) {
+            .logo-image {
+                height: 30px;
+            }
+        }
+
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .animated-background::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, #ff00ff, transparent 40%),
+                radial-gradient(circle at 70% 70%, #00ffff, transparent 40%),
+                radial-gradient(circle at 50% 50%, #00ff00, transparent 30%);
+            animation: moveBackground 20s linear infinite;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-20%, -20%) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(10%, 10%) rotate(180deg);
+            }
+
+            100% {
+                transform: translate(-20%, -20%) rotate(360deg);
+            }
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .contact-card {
+            max-width: 700px;
+            width: 100%;
+            background-color: #1a1a2a;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px #ff00ff33;
+        }
+
+        .contact-heading {
+            font-size: 2.2rem;
+            color: #00ffcc;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        .contact-subtext {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #ccc;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            color: white;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #00ffff;
+        }
+
+        .quote-box {
+            background-color: #0f0f0f;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 15px #333;
+            color: #ddd;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        .quote-box p:last-child {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .contact-card {
+                padding: 25px 15px;
+            }
+
+            .social-icons {
+                gap: 15px;
+                font-size: 1.5rem;
+            }
+
+            .quote-box {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="logo.png" />
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo-image" />
+            <span class="logo-text">Your Quotes</span>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="main.html" >Home</a></li>
+                <li><a href="term2.html">Terms</a></li>
+                <li><a href="about2.html">About</a></li>
+                <li><a href="contact2.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="animated-background"></div>
+
+    <main class="contact-section">
+        <div class="contact-card">
+            <h2 class="contact-heading">Contact Me</h2>
+            <p class="contact-subtext">
+                You can reach out anytime through the platforms below. I’d love to hear from you!
+            </p>
+
+            <div class="social-icons">
+                <a href="https://wa.me/919439204006" title="WhatsApp" target="_blank"><i
+                        class="fab fa-whatsapp"></i></a>
+                <a href="mailto:debanandakuanr453@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://instagram.com/itz_debananda_99" title="Instagram" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://t.me/debanandakuanr" title="Telegram" target="_blank"><i
+                        class="fab fa-telegram"></i></a>
+                <a href="https://www.threads.net/@itz_debananda_99" title="Portfolio"><i class="fas fa-link"></i></a>
+            </div>
+
+            <div class="quote-box">
+                <p>
+                    “As the developer of this project, I believe in simplicity, purpose, and passion. My aim is to
+                    empower users with easy-to-use tools that solve real problems. This platform was built not just with
+                    code, but with heart. Every feature is a step toward helping others, and every improvement is a
+                    reflection of your feedback. Thank you for being a part of this journey.”
+                </p>
+                <br>
+                <p>— Debananda Kuanr</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 InspireQuotes || All rights reserved || Devloped By Debananda Kuanr.
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('show');
+        });
+    </script>
+</body>
+
+</html>
